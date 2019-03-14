@@ -1,6 +1,8 @@
-/* pages/index/index.wxss */
+/*components/like/index.wxss */
 .container{
-    
+    display:inline-flex;/*自适应宽度---动态数字*/
+    flex-direction: row;
+    padding: 10rpx;
 }
 .container image{
     width: 32rpx;
@@ -9,4 +11,8 @@
 .container text{
     font-size: 24rpx;
     color: #bbbbbb;
+    position: relative;
+    bottom: 10rpx;
+    left: 6rpx;
+    line-height:24rpx; 
 }

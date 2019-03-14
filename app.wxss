@@ -1,0 +1,5 @@
+page{
+    /*平方  思源*/
+    font-family: "PingFangSC-Thin";
+    font-size: 32rpx;
+}
