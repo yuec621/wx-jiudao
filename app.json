@@ -1,7 +1,6 @@
 {
     "pages":[
-        "pages/index/index",
-        "pages/logs/logs"
+        "pages/classic/classic"
         
     ],
     "window":{
@@ -11,27 +10,7 @@
         "navigationBarTextStyle": "black"
     
     },
-    "tabBar":{
-         "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "书籍",
-        "position":"top" ,
-        "iconPath":"/images/tab/book.png",
-        "selectedIconPath":"images/tab/book@highlight.png",
-        "selectedColor":"#FFB6C1"
-
-      },
-      {
-        "pagePath": "pages/logs/logs",
-        "text": "我的",
-        "position": "top",
-        "iconPath": "/images/tab/my.png",
-        "selectedIconPath": "images/tab/my@highlight.png",
-        "selectedColor":"#FFB6C1"
-      }
-    ]
-    },
+   
     "debug":true
     
 
