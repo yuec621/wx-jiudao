@@ -3,6 +3,7 @@
     display:inline-flex;/*自适应宽度---动态数字*/
     flex-direction: row;
     padding: 10rpx;
+    width: 90rpx;
 }
 .container image{
     width: 32rpx;

@@ -1,4 +1,7 @@
 // pages/classic/classic.js
+import {ClassicModel}from '../../models/classic.js'
+let classic=new ClassicModel()
+
 Page({
 
   /**
@@ -12,8 +15,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // http.request({
+    //   url:'classic/latest',
+    //   success:(res)=>{
+    //     console.log(res)
+    //   }
+    // })
+    classic.getLatest((res)=>{
+      //回调函数
+      this.setData({
+        classic:res,
+      })
+    
 
+    })
   },
+    onLike:function(event){
+      console.log(event)
+    },
+  
 
   /**
    * 生命周期函数--监听页面初次渲染完成

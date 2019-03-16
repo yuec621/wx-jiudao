@@ -1,4 +1,5 @@
 <!--pages/classic/classic.wxml-->
 <!--自定义组件-->
-<like-cmp />
+<like-cmp bind:like="onLike" like="{{classic.like_status}}" count="{{classic.fav_nums}}" />
+<movie-cmp img="{{classic.img}}" content="{{classic.content}}" />
 
