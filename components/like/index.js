@@ -33,8 +33,9 @@ Component({
    */
   methods:{
     onLike:function(event){
+      
       //自定义事件
-
+      //let作用域限于块
       let like=this.properties.like
       let count=this.properties.count
 

@@ -1,5 +1,8 @@
-<!--pages/classic/classic.wxml-->
-<!--自定义组件-->
-<like-cmp bind:like="onLike" like="{{classic.like_status}}" count="{{classic.fav_nums}}" />
-<movie-cmp img="{{classic.img}}" content="{{classic.content}}" />
+<!-- 自定义组件 -->
+<view class="header" >
+<epsoide-cmp class="epsoide" index="{{classic.index}}"/>
+<like-cmp class="like" bind:like="onLike" like="{{classic.like_status}}" count="{{classic.fav_nums}}" />
+</view>
+<movie-cmp img="{{classic.image}}" content="{{classic.content}}" />
+
 

@@ -1,37 +1,73 @@
 // pages/classic/classic.js
+//组件绝对路径     import相对路径
+// import {HTTP} from '../../util/http.js'
 import {ClassicModel}from '../../models/classic.js'
-let classic=new ClassicModel()
-
+import {LikeModel}from '../../models/like.js'
+// let htp=new HTTP()
+let classicModel=new ClassicModel()
+let likeModel=new LikeModel()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    classic:null
+  //  test:1
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // http.request({
-    //   url:'classic/latest',
-    //   success:(res)=>{
-    //     console.log(res)
-    //   }
-    // })
-    classic.getLatest((res)=>{
+    classicModel.getLatest((res)=>{
       //回调函数
       this.setData({
-        classic:res,
+        classic:res
+        // test:2  数据更新
       })
     
 
     })
-  },
-    onLike:function(event){
+    /*
+    http.request({
+      url:'classic/latest',
+      success:(res)=>{
+        console.log(res)
+      }
+    })
+*/
+  //  wx.request({//异步
+  //     url:'http://bl.7yue.pro/v1/classic/latest',
+  //   header:{
+  //     appKey:"an2GxVWfNvRloQhd"
+  //   },
+  //   success:(res)=>{
+  //     console.log(this.data.test)
+  //   }
+    /*
+    //回调地狱
+    success:(res)=>{
+      console.log(this.data.test)
+      wx.request({
+        success:(res)=>{
+          wx.request({
+            success:(res)=>{
+
+            }
+          })
+        }
+      })
+    }
+    */
+    // })
+    
+     },
+       
+     onLike:function(event){
       console.log(event)
+      let behavior=event.detail.behavior
+      likeModel.like(behavior,this.data.classic.id,this.data.classic.type)
     },
   
 
