@@ -1,8 +1,9 @@
 <!-- 自定义组件 -->
+<view class="container">
 <view class="header" >
 <epsoide-cmp class="epsoide" index="{{classic.index}}"/>
 <like-cmp class="like" bind:like="onLike" like="{{classic.like_status}}" count="{{classic.fav_nums}}" />
 </view>
 <movie-cmp img="{{classic.image}}" content="{{classic.content}}" />
-
-
+<navi-cmp bind:left="leftNext" bind:right=Previous title="{{classic.title}}" first="{{}}" latest="{{}}" class="navi"/>
+</view>
