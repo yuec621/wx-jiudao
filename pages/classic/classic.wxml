@@ -5,5 +5,5 @@
 <like-cmp class="like" bind:like="onLike" like="{{classic.like_status}}" count="{{classic.fav_nums}}" />
 </view>
 <movie-cmp img="{{classic.image}}" content="{{classic.content}}" />
-<navi-cmp bind:left="leftNext" bind:right=Previous title="{{classic.title}}" first="{{}}" latest="{{}}" class="navi"/>
+<navi-cmp bind:left="onNext" bind:right="onPrevious" title="{{classic.title}}" first="{{}}" latest="{{}}" class="navi"/>
 </view>

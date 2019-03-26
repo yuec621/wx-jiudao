@@ -71,6 +71,12 @@ Page({
       let behavior=event.detail.behavior
       likeModel.like(behavior,this.data.classic.id,this.data.classic.type)
     },
+    onNext:function(event){
+
+    },
+    onPrevious:function(event){
+
+    },
   
 
   /**
