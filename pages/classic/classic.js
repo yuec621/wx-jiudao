@@ -23,12 +23,14 @@ Page({
    */
   onLoad: function (options) {
     classicModel.getLatest((res)=>{
+      // console.log('${this.test()}456')
       //回调函数
       this.setData({
         classic:res
+        //es6扩展运算符----...res
         // test:2  数据更新
       })
-    
+    //latestClassic  currentClassic latestIndex currentIndex
 
     })
     /*
@@ -65,6 +67,11 @@ Page({
     // })
     
      },
+
+     //模板字符串
+    //  test:function(){
+    //   return 123
+    //  }
        
      onLike:function(event){
       console.log(event)
@@ -72,12 +79,37 @@ Page({
       likeModel.like(behavior,this.data.classic.id,this.data.classic.type)
     },
     onNext:function(event){
-
+      this._updateClassic('next')
     },
     onPrevious:function(event){
+      // let index=this.data.classic.index
+      // classicModel.getPrevious(index,(res)=>{
+      //   // console.log(res)
+      //   this.setData({//数据更新
+      //     classic:res,
+      //     latest:classicModel.isLatest(res.index),
+      //     first:classicModel.isFirst(res.index)
+      //   })
+      // })
+      this._updateClassic('previous')
 
     },
   
+
+    _updateClassic:function(nextOrPrevious){//封装按钮
+      let index=this.data.classic.index
+      classicModel.getClassic(index,nextOrPrevious,(res)=>{
+        // console.log(res)
+        this.setData({//数据更新
+          classic:res,
+          latest:classicModel.isLatest(res.index),
+          first:classicModel.isFirst(res.index)
+        })
+      })
+    },
+
+
+   
 
   /**
    * 生命周期函数--监听页面初次渲染完成

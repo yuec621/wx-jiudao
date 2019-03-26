@@ -8,7 +8,7 @@ Component({
   properties: {
    
   },
-//behavior定义共有的行为
+//behavior定义共有的行为----多继承
   /**
    * 组件的初始数据
    */
