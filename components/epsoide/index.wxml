@@ -1,5 +1,5 @@
 <!--components/epsoide/index.wxml-->
-<view class="container">
+<view class="container" >
     <view class="index_container" >
     <text class="plain" >NO.</text>
     <text class="index">{{_index}}</text>

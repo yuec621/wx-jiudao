@@ -13,7 +13,7 @@ class ClassicModel extends HTTP {
             }
         })
     }
-
+   
     getClassic(index,nextOrPrevious,sCallback) {//封装上下期按钮
         /*
         缓存中寻找or API写入到缓存中
@@ -25,8 +25,8 @@ class ClassicModel extends HTTP {
         this.request({
             //模板字符串
 
-            // url: 'classic/' + index +'/'+ nextOrPrevious,
-            url: 'classic/${index}/${nextOrPrevious}',
+            url: 'classic/' + index +'/'+ nextOrPrevious,
+            // url: 'classic/${index}/${nextOrPrevious}',
             success: (res) => {
                 wx.setStorageSync(this._getKey(res.index),res)
                 sCallback(res)
