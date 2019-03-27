@@ -25,6 +25,16 @@ Component({
     playSrc:'images/player@play.png'
   },
 
+  attached:function(event){
+    this._recoverStatus()
+  },
+  detached:function(event){//生命周期函数
+    //hidden,wx:if
+    // mMgr.stop()
+    
+
+  },
+
   /**
    * 组件的方法列表
    */
@@ -37,7 +47,7 @@ Component({
         this.setData({
           playing:true
         })
-       mMgr.title = this.properties.title
+       mMgr.title = this.data.src
        mMgr.src=this.properties.src
       }else{
         this.setData({
@@ -47,6 +57,33 @@ Component({
       mMgr.pause()
       }
       
+    },
+    _recoverStatus:function(){
+      if(mMgr.paused){
+        this.setData({
+          playing:false
+        })
+        return 
+      }
+      if(mMgr.src==this.properties.src){
+        this.setData({
+          playing:true
+        })
+      }
+    },
+    _monitorSwitch:function(){
+      mMgr.onPlay(()=>{
+        this._recoverStatus()
+      })
+      mMgr.onPause(()=>{
+        this._recoverStatus()
+      })
+      mMgr.onStop(()=>{
+        this._recoverStatus()
+      })
+      mMgr.onEnded(()=>{
+        this._recoverStatus()
+      })
     }
   }
 })
