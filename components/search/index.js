@@ -2,6 +2,7 @@
 import {KeywordModel} from '../../models/keyword.js'
 const keywordModel=new KeywordModel()
 import {BookModel} from '../../models/book.js'
+import { start } from 'repl';
 const bookModel=new BookModel()
 Component({
   /**
@@ -44,7 +45,15 @@ Component({
   methods: {
     //加载更多
     _load_more(){
+      const length=this.data.dataArray.length
+      bookModel.search(length,this.data.q).then(res=>{
+        this.data.dataArray
 
+        const tempArray=this.data.dataArray.concat(res.books)
+        this.setData({
+          dataArray:tempArray
+        })
+      })
     },
     onCancel(event){
       this.triggerEvent('cancel',{},{})
