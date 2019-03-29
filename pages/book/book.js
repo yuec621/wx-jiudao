@@ -3,13 +3,20 @@ import {
   BookModel
 } from '../../models/book.js'
 const bookModel=new BookModel()
+import {
+  random
+} from '../../util/common.js'
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    books:[]
+    books:[],
+    searching:false,
+    more:''
+
   },
 
   /**
@@ -56,6 +63,17 @@ Page({
     */
   },
 
+  onSearching(event){
+    this.setData({
+      searching:true
+    })
+  },
+  onCancel(event){
+    this.setData({
+      searching:false
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -95,6 +113,11 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    // console.log(123123)
+this.setData({
+  more:random(16)
+})
+
 
   },
 
