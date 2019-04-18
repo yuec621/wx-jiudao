@@ -42,9 +42,8 @@ Page({
           likeStatus: res[2].like_status,
           likeCount: res[2].fav_nums
         })
-       
+        wx.hideLoading()
       })
-      wx.hideLoading()
 
     // detail.then(res => {
     //   console.log(res)

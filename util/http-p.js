@@ -19,7 +19,7 @@ class HTTP{
             data:data,
             header:{
                 'content-type':'application/json',
-                'appkey':config.appKey
+                'appkey':config.appkey
             },
             success:(res)=>{
                 const code = res.statusCode.toString()

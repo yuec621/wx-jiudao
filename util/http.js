@@ -18,7 +18,7 @@ class HTTP{
             data:params.data,
             header:{
                 'content-type':'application/json',
-                'appkey':config.appKey
+                'appkey':config.appkey
             },
             success:(res)=>{
                 let code = res.statusCode.toString()

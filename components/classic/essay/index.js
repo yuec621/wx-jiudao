@@ -1,14 +1,18 @@
-// components/classic/essay/index.js
 import {classicBeh} from '../classic-beh.js'
+
 Component({
   /**
-   * 组件的属性列表
+   * 组件的属性列表 
    */
   behaviors:[classicBeh],
+  // 多继承
   properties: {
-   
   },
-//behavior定义共有的行为----多继承
+
+  attached:function(){
+
+  },
+// behavior 行为
   /**
    * 组件的初始数据
    */

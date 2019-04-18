@@ -1,7 +1,9 @@
- const config={
-    api_base_url:'http://bl.7yue.pro/v1/',
-    appKey:'an2GxVWfNvRloQhd'
+
+const config = {
+    api_base_url: 'http://bl.7yue.pro/v1/',
+    appkey: "an2GxVWfNvRloQhd",
 }
 
 
-export {config}
+
+export {config }

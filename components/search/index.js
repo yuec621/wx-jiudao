@@ -1,17 +1,29 @@
 // components/search/index.js
-import {KeywordModel} from '../../models/keyword.js'
-const keywordModel=new KeywordModel()
-import {BookModel} from '../../models/book.js'
-import { start } from 'repl';
-const bookModel=new BookModel()
+import {
+  KeywordModel
+} from '../../models/keyword.js'
+
+import {
+  BookModel
+} from '../../models/book.js'
+
+import {
+  paginationBev
+} from '../behaviors/pagination.js'
+
+const keywordModel = new KeywordModel()
+const bookModel = new BookModel()
+
 Component({
   /**
    * 组件的属性列表
    */
+  behaviors: [paginationBev],
   properties: {
-    more:{
-      type:String,
-      observer:'_load_more'
+    more: {
+      type: String,
+      observer: 'loadMore'
+      // true, true, true,
     }
   },
 
@@ -19,65 +31,108 @@ Component({
    * 组件的初始数据
    */
   data: {
-    historyWords:[],
-    hotWords:[],
-    dataArray:[],
-    searching:false,
-    q:''
-
+    historyWords: [],
+    hotWords: [],
+    searching: false,
+    q: '',
+    loading: false,
+    loadingCenter: false
   },
-  attached(){
-    const historyWords=keywordModel.getHistory()
-    const hotWords=keywordModel.getHot()
+
+  attached() {
     this.setData({
-      // historyWords:historyWords
-      historyWords
+      historyWords: keywordModel.getHistory()
     })
-    hotWords.then(res=>{
+
+    keywordModel.getHot().then(res => {
       this.setData({
-        hotWords:res.hot
+        hotWords: res.hot
       })
     })
   },
+
   /**
    * 组件的方法列表
    */
   methods: {
-    //加载更多
-    _load_more(){
-      const length=this.data.dataArray.length
-      bookModel.search(length,this.data.q).then(res=>{
-        this.data.dataArray
+    loadMore() {
+      if (!this.data.q) {
+        return
+      }
+      if (this.isLocked()) {
+        return
+      }
+      if (this.hasMore()) {
+        this.locked()
+        bookModel.search(this.getCurrentStart(), this.data.q)
+          .then(res => {
+            this.setMoreData(res.books)
+            this.unLocked()
+          }, () => {
+            this.unLocked()
+          })
+        // 死锁
+      }
+    },
 
-        const tempArray=this.data.dataArray.concat(res.books)
-        this.setData({
-          dataArray:tempArray
-        })
-      })
+
+    onCancel(event) {
+      this.initialize()
+      this.triggerEvent('cancel', {}, {})
     },
-    onCancel(event){
-      this.triggerEvent('cancel',{},{})
+
+    onDelete(event) {
+      this.initialize()
+      this._closeResult()
     },
-    onDelete(){
+
+    onConfirm(event) {
+      this._showResult()
+      this._showLoadingCenter()
+      // this.initialize() 
+      const q = event.detail.value || event.detail.text
       this.setData({
-        searching:false
+        q
+      })
+      bookModel.search(0, q)
+        .then(res => {
+          this.setMoreData(res.books)
+          this.setTotal(res.total)
+          keywordModel.addToHistory(q)
+          this._hideLoadingCenter()
+        })
+    },
+
+    _showLoadingCenter() {
+      this.setData({
+        loadingCenter: true
       })
     },
-    onConfirm(event){
+
+    _hideLoadingCenter() {
       this.setData({
-        searching:true
+        loadingCenter: false
       })
-      const q=event.detail.value||event.detail.text
-      // keywordModel.addToHistory(q)
-      // const q=event.detail.value
-      bookModel.search(0,q).then(res=>{
-        this.setData({
-          dataArray:res.books,
-          q:q
-        })
-        keywordModel.addToHistory(q)
+    },
+
+    _showResult() {
+      this.setData({
+        searching: true
+      })
+    },
+
+    _closeResult() {
+      this.setData({
+        searching: false,
+        q: ''
       })
     }
-    
+
+    // onReachBottom(){
+    //   console.log(123123)
+    // }
+
+    // scroll-view | Page onReachBottom
+
   }
 })
